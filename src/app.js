@@ -1,5 +1,4 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
@@ -7,7 +6,6 @@ class AppController {
   constructor() {
     this.express = express()
 
-    this.moongoseConnection()
     this.useJsonUrlEncoded()
     this.morganUse()
     this.middleware()
@@ -30,12 +28,6 @@ class AppController {
   }
   morganUse() {
     this.express.use(morgan('dev'))
-  }
-  moongoseConnection() {
-    mongoose.connect('mongodb://localhost:27017/upload', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
   }
   server() {
     return this.express.listen(8080, () => {
